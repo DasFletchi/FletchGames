@@ -1,12 +1,5 @@
 export const games = [
   {
-    id: 'slope',
-    title: 'Slope',
-    iframeUrl: 'https://kdata1.com/2020/05/slope/',
-    thumbnail: 'https://i.ibb.co/WWDSc2Mf/IMG-4100.jpg',
-    category: 'Arcade'
-  },
-  {
     id: 'crazy-panda',
     title: 'Crazy Panda',
     iframeUrl: 'https://html-classic.itch.zone/html/15767043/index.html',
@@ -14,6 +7,13 @@ export const games = [
     category: 'Platformer',
     sourceUrl: 'https://parmn.itch.io/crazy-panda',
     description: 'for parmn my cutie patootie'
+  },
+  {
+    id: 'slope',
+    title: 'Slope',
+    iframeUrl: 'https://kdata1.com/2020/05/slope/',
+    thumbnail: 'https://i.ibb.co/WWDSc2Mf/IMG-4100.jpg',
+    category: 'Arcade'
   }
 ];
 

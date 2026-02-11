@@ -54,7 +54,6 @@ const App = () => {
   };
 
   const handleSubmitRequest = async (requestData) => {
-    // 1. Save locally as backup (only visible to this user)
     const existingRequests = JSON.parse(localStorage.getItem('fletch_requests') || '[]');
     const newRequest = {
       ...requestData,
@@ -64,7 +63,6 @@ const App = () => {
     existingRequests.push(newRequest);
     localStorage.setItem('fletch_requests', JSON.stringify(existingRequests));
     
-    // 2. Try to send via Webhook if configured (Visible to Admin via Discord)
     const webhookUrl = localStorage.getItem('fletch_webhook_url');
     let webhookSuccess = false;
 
@@ -188,10 +186,13 @@ const App = () => {
         React.createElement('div', { className: "flex items-center gap-4" },
           React.createElement('span', { className: "text-xl font-bold tracking-tighter heading-font text-zinc-300 uppercase" }, "Fletch Games"),
           React.createElement('span', { className: "h-4 w-[1px] bg-zinc-800" }),
-          React.createElement('span', { 
-            className: "text-[10px] text-zinc-500 uppercase tracking-widest cursor-pointer hover:text-white",
-            onClick: () => setIsSubmitModalOpen(true)
-          }, "© 2024 Privacy Enabled"),
+          React.createElement('div', { className: "flex flex-col" },
+            React.createElement('span', { 
+              className: "text-[10px] text-zinc-500 uppercase tracking-widest cursor-pointer hover:text-white",
+              onClick: () => setIsSubmitModalOpen(true)
+            }, "© 2024 Privacy Enabled"),
+            React.createElement('span', { className: "text-[8px] text-zinc-700 font-mono" }, "BUILD_V1.0.4_STABLE")
+          )
         ),
         React.createElement('div', { className: "flex gap-10 text-[10px] text-zinc-400 uppercase tracking-widest font-semibold" },
           React.createElement('button', { onClick: () => setIsSubmitModalOpen(true), className: "hover:text-white transition-colors" }, "Submit Request"),
