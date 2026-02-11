@@ -1,7 +1,6 @@
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Game } from '../types';
-import { Maximize, Minimize, X, Info, Layout, Expand, ArrowLeft } from 'lucide-react';
+import { Layout, Expand, ArrowLeft, X, ExternalLink } from 'lucide-react';
 
 interface GamePlayerProps {
   game: Game;
@@ -20,6 +19,13 @@ const GamePlayer: React.FC<GamePlayerProps> = ({ game, onClose, isFocusMode, onT
         iframeRef.current.requestFullscreen();
       }
     }
+  };
+
+  const getSourceLabel = (url: string | undefined) => {
+    if (!url) return "Original Source";
+    if (url.includes('yandex.com')) return "Yandex Games";
+    if (url.includes('itch.io')) return "Itch.io";
+    return "Original Source";
   };
 
   useEffect(() => {
@@ -119,9 +125,30 @@ const GamePlayer: React.FC<GamePlayerProps> = ({ game, onClose, isFocusMode, onT
               <span className="px-3 py-1 bg-zinc-900 text-zinc-500 text-[9px] font-bold uppercase tracking-widest border border-zinc-800">{game.category}</span>
               <span className="text-zinc-700 text-[10px] uppercase font-bold tracking-widest">Verified Session</span>
             </div>
-            <div className="text-zinc-400 text-sm leading-relaxed max-w-2xl font-medium">
-              You are currently viewing a proxied instance of {game.title}. For optimal performance, ensure hardware acceleration is enabled in your browser settings.
+            <div className="space-y-4">
+              <div className="text-zinc-400 text-sm leading-relaxed max-w-2xl font-medium">
+                You are currently viewing a proxied instance of {game.title}. For optimal performance, ensure hardware acceleration is enabled in your browser settings.
+              </div>
+              {game.description && (
+                <div className="text-zinc-500 text-xs italic font-mono opacity-80">
+                  {`// COMMENT: ${game.description}`}
+                </div>
+              )}
             </div>
+            {game.sourceUrl && (
+              <div className="pt-2">
+                <a 
+                  href={game.sourceUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-6 py-3 border border-zinc-800 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all group"
+                >
+                  <ExternalLink size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                  {`Play on ${getSourceLabel(game.sourceUrl)}`}
+                </a>
+                <p className="text-zinc-600 text-[8px] mt-3 uppercase tracking-widest">Use this if the loading screen is stuck.</p>
+              </div>
+            )}
           </div>
           <div className="space-y-8">
             <div>

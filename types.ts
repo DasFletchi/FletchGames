@@ -5,6 +5,7 @@ export interface Game {
   thumbnail: string;
   category: string;
   sourceUrl?: string;
+  description?: string;
 }
 
 export type ViewState = 'grid' | 'player';

@@ -94,8 +94,13 @@ const GamePlayer = ({ game, onClose, isFocusMode, onToggleFocus }) => {
           React.createElement('span', { className: "px-3 py-1 bg-zinc-900 text-zinc-500 text-[9px] font-bold uppercase tracking-widest border border-zinc-800" }, game.category),
           React.createElement('span', { className: "text-zinc-700 text-[10px] uppercase font-bold tracking-widest" }, "Verified Session")
         ),
-        React.createElement('div', { className: "text-zinc-400 text-sm leading-relaxed max-w-2xl font-medium" }, 
-          `You are currently viewing a proxied instance of ${game.title}. For optimal performance, ensure hardware acceleration is enabled in your browser settings.`
+        React.createElement('div', { className: "space-y-4" },
+          React.createElement('div', { className: "text-zinc-400 text-sm leading-relaxed max-w-2xl font-medium" }, 
+            `You are currently viewing a proxied instance of ${game.title}. For optimal performance, ensure hardware acceleration is enabled in your browser settings.`
+          ),
+          game.description && React.createElement('div', { className: "text-zinc-500 text-xs italic font-mono opacity-80" }, 
+            `// COMMENT: ${game.description}`
+          )
         ),
         game.sourceUrl && React.createElement('div', { className: "pt-2" },
           React.createElement('a', { 
